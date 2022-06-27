@@ -35,6 +35,8 @@ fun ComposeAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compos
         LightColorPalette
     }
 
+
+
     MaterialTheme(
         colors = colors,
         typography = Typography,
