@@ -28,10 +28,38 @@ class MainActivity : ComponentActivity() {
             ComposeAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    ComposeArticle()
+                    ComposeTask()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ComposeTask() {
+    Column(modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally)
+        .fillMaxHeight().wrapContentHeight(align = Alignment.CenterVertically)) {
+        SuccessImage()
+        TaskCompleteText()
+    }
+}
+
+@Composable
+fun SuccessImage() {
+    val image = painterResource(id = R.drawable.task_completed)
+    Image(painter = image, contentDescription = null,
+        modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally))
+}
+
+@Composable
+fun TaskCompleteText() {
+    Column {
+        Text(text = stringResource(id = R.string.task_complete_text),
+            fontSize = 24.sp, textAlign = TextAlign.Center,
+            modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
+                .fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally))
+        Text(text = stringResource(id = R.string.nice_work_text), fontSize = 16.sp,
+            modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally))
     }
 }
 
@@ -54,7 +82,8 @@ fun HeaderImage() {
 fun ContentText() {
     Column {
         Text(text = stringResource(id = R.string.topic_text), fontSize = 24.sp,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .wrapContentWidth(Alignment.CenterHorizontally)
                 .padding(16.dp))
         Text(text = stringResource(id = R.string.definition_text),
@@ -104,9 +133,15 @@ fun Greeting(name: String) {
 
 @Preview(showBackground = true)
 @Composable
+fun ComposeTaskPreview() {
+    ComposeTask()
+}
+
+/*@Preview(showBackground = true)
+@Composable
 fun ComposeArticlePreview() {
     ComposeArticle()
-}
+}*/
 
 /*
 @Preview(showBackground = true)
