@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,15 +28,43 @@ class MainActivity : ComponentActivity() {
             ComposeAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    BirthdayGreetingWithImage(
-                        message = getString(R.string.happy_birthday_text),
-                        from = getString(R.string.signature_text)
-                    )
+                    ComposeArticle()
                 }
             }
         }
     }
 }
+
+@Composable
+fun ComposeArticle() {
+    Column {
+        HeaderImage()
+        ContentText()
+    }
+}
+
+@Composable
+fun HeaderImage() {
+    val image = painterResource(id = R.drawable.compose_background)
+    Image(painter = image, contentDescription = null,
+        modifier = Modifier.fillMaxWidth())
+}
+
+@Composable
+fun ContentText() {
+    Column {
+        Text(text = stringResource(id = R.string.topic_text), fontSize = 24.sp,
+            modifier = Modifier.fillMaxWidth()
+                .wrapContentWidth(Alignment.CenterHorizontally)
+                .padding(16.dp))
+        Text(text = stringResource(id = R.string.definition_text),
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+            textAlign = TextAlign.Justify)
+        Text(text = stringResource(id = R.string.explanation_text),
+            modifier = Modifier.padding(16.dp),
+            textAlign = TextAlign.Justify)
+    }
+} 
 
 @Composable
 fun BirthdayGreetingWithImage(message: String, from: String) {
@@ -75,10 +104,18 @@ fun Greeting(name: String) {
 
 @Preview(showBackground = true)
 @Composable
+fun ComposeArticlePreview() {
+    ComposeArticle()
+}
+
+/*
+@Preview(showBackground = true)
+@Composable
 fun BirthdayGreetingWithTextPreview() {
     BirthdayGreetingWithImage(message = stringResource(id = R.string.happy_birthday_text),
         stringResource(id = R.string.signature_text))
 }
+*/
 
 /*
 @Preview(showBackground = true)
