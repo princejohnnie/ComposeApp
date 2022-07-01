@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -15,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,32 +39,77 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ComposeTask() {
-    Column(modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally)
-        .fillMaxHeight().wrapContentHeight(align = Alignment.CenterVertically)) {
-        SuccessImage()
-        TaskCompleteText()
+fun ComposeQuadrantApp() {
+    Column(Modifier.fillMaxWidth()) {
+        Row(Modifier.weight(1f)) {
+            ComposableInfoCard(title = stringResource(id = R.string.first_title),
+            stringResource(id = R.string.first_description),
+            Color.Green, Modifier.weight(1f))
+
+            ComposableInfoCard(title = stringResource(id = R.string.second_title),
+                stringResource(id = R.string.second_description),
+                Color.Yellow, Modifier.weight(1f))
+        }
+        Row(Modifier.weight(1f)) {
+            ComposableInfoCard(title = stringResource(id = R.string.third_title),
+                stringResource(id = R.string.third_description),
+                Color.Cyan, Modifier.weight(1f))
+
+            ComposableInfoCard(title = stringResource(id = R.string.fourth_title),
+                stringResource(id = R.string.fourth_description),
+                Color.LightGray, Modifier.weight(1f))
+        }
+
+    }
+
+}
+
+@Composable
+fun ComposableInfoCard(title: String,
+                       description: String,
+                       backgroundColor: Color,
+                       modifier: Modifier = Modifier) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .background(backgroundColor)
+        .padding(16.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center) {
+
+        Text(text = title, fontWeight = FontWeight.Bold, modifier = Modifier.padding(16.dp))
+        Text(text = description, textAlign = TextAlign.Justify)
+
     }
 }
 
 @Composable
-fun SuccessImage() {
-    val image = painterResource(id = R.drawable.task_completed)
-    Image(painter = image, contentDescription = null,
-        modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally))
+fun QuadrantText(header: String, text: String) {
+    Column {
+        Text(text = header, modifier = Modifier.padding(bottom = 16.dp)
+            , fontWeight = FontWeight.Bold)
+        Text(text = text, textAlign = TextAlign.Justify)
+    }
 }
 
 @Composable
-fun TaskCompleteText() {
-    Column {
+fun ComposeTask() {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .fillMaxHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        val image = painterResource(id = R.drawable.task_completed)
+        Image(painter = image, contentDescription = null)
         Text(text = stringResource(id = R.string.task_complete_text),
             fontSize = 24.sp, textAlign = TextAlign.Center,
             modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
-                .fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally))
-        Text(text = stringResource(id = R.string.nice_work_text), fontSize = 16.sp,
-            modifier = Modifier.fillMaxWidth().wrapContentWidth(align = Alignment.CenterHorizontally))
+        )
+        Text(text = stringResource(id = R.string.nice_work_text), fontSize = 16.sp
+        )
     }
 }
+
 
 @Composable
 fun ComposeArticle() {
@@ -134,7 +182,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun ComposeTaskPreview() {
-    ComposeTask()
+    ComposeQuadrantApp()
 }
 
 /*@Preview(showBackground = true)
