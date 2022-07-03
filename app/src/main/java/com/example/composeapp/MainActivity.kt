@@ -30,8 +30,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeAppTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    ComposeQuadrantApp()
+                Surface(color = Color(R.color.background)) {
+                    BusinessCardApp()
                 }
             }
         }
@@ -182,7 +182,12 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun ComposeTaskPreview() {
-    ComposeQuadrantApp()
+    ComposeAppTheme {
+        // A surface container using the 'background' color from the theme
+        Surface(color = Color(R.color.background)) {
+            BusinessCardApp()
+        }
+    }
 }
 
 /*@Preview(showBackground = true)
